@@ -1,0 +1,12 @@
+---
+import { site } from "@/constants/config";
+
+interface Props {
+  class?: string;
+}
+const { class: classes } = Astro.props;
+---
+
+<footer class:list={["py-5 text-center", classes]}>
+  {site.name} &copy; {new Date().getFullYear()}
+</footer>

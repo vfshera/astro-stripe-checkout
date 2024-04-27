@@ -1,0 +1,37 @@
+---
+import "@/styles/global.css";
+import TheNavbar from "@/components/TheNavbar.astro";
+import TheFooter from "@/components/TheFooter.astro";
+
+import { site } from "@/constants/config";
+
+import { SEO } from "astro-seo";
+import type { Props as AstroSEOProps } from "astro-seo";
+
+interface Props extends AstroSEOProps {}
+
+const { title, description, ...props } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      title={title}
+      titleDefault={site.name}
+      titleTemplate={`%s - ${site.name}`}
+      description={description || site.description}
+      {...props}
+    />
+  </head>
+  <body class="flex flex-col min-h-full">
+    <TheNavbar />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <TheFooter class="mt-auto" />
+  </body>
+</html>
