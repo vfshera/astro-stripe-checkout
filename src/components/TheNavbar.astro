@@ -1,21 +1,6 @@
 ---
 import { site } from "@/constants/config";
 
-const links = [
-  {
-    name: "Home",
-    url: "/",
-  },
-  {
-    name: "About",
-    url: "#about",
-  },
-  {
-    name: "Contact",
-    url: "#contact",
-  },
-];
-
 interface Props {
   class?: string;
 }
@@ -53,17 +38,5 @@ const { class: classes } = Astro.props;
       </svg>
       {site.name}
     </a>
-
-    <ul class="flex items-center gap-5">
-      {
-        links.map((link) => (
-          <li>
-            <a href={link.url} class="hover:underline">
-              {link.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
   </nav>
 </header>
