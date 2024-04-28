@@ -13,7 +13,7 @@ export default function Checkout() {
       method: "POST",
     })
       .then((res) => res.json())
-      .then((data) => data.clientSecret);
+      .then((data) => data.clientSecret as string);
   }, []);
 
   return (
