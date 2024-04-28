@@ -1,16 +1,10 @@
-# Astro Starter Kit: Mini
+# Astro Stripe Setup
 
-Create your new Astro project by running.
+## Usage
 
-```sh
-npm create astro@latest -- --template vfshera/astro-templates/packages/mini
-```
+Copy `.env.example` to `.env` and add stripe keys.
 
-OR
-
-```sh
-pnpm create astro@latest --template vfshera/astro-templates/packages/mini
-```
+Remember to set [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) key in astro config so that stripe can accurately redirect to your domain.
 
 ## 🧞 Commands
 
