@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request, site }) => {
     line_items: [
       {
         price: "price_1MkfFaC2E9PG9OjQBxEmv6VU",
-        quantity: 2,
+        quantity: 1,
       },
       {
         price: "price_1MS2qqC2E9PG9OjQg4dszKGy",

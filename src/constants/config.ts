@@ -1,4 +1,4 @@
 export const site = {
-  name: "Checkout",
+  name: "Stripe Checkout",
   description: "",
 };
