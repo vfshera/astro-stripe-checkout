@@ -1,7 +1,6 @@
 ---
 import "@/styles/global.css";
 import TheNavbar from "@/components/TheNavbar.astro";
-import TheFooter from "@/components/TheFooter.astro";
 
 import { site } from "@/constants/config";
 
@@ -32,6 +31,5 @@ const { title, description, ...props } = Astro.props;
     <main class="flex-1">
       <slot />
     </main>
-    <TheFooter class="mt-auto" />
   </body>
 </html>
