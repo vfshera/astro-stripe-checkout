@@ -1,23 +1,39 @@
+import { product } from "@/data/products";
 import { stripe } from "@/lib/stripe";
 import type { APIRoute } from "astro";
+import { z } from "astro/zod";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const { price, items } = product.variants[0];
+    const PRICE = Math.round(parseFloat(price) * 100 * items);
+
     const intent = await stripe.paymentIntents.create({
-      amount: 100,
+      amount: PRICE,
       currency: "usd",
       automatic_payment_methods: {
         enabled: true,
       },
+      metadata: {
+        product_id: product.id,
+      },
     });
 
-    return new Response(JSON.stringify({ clientSecret: intent.client_secret }));
+    return new Response(
+      JSON.stringify({ clientSecret: intent.client_secret, id: intent.id }),
+      { status: 200 }
+    );
   } catch (e) {
     console.log(e);
 
     return new Response(JSON.stringify({ error: "" }), { status: 400 });
   }
 };
+
+const updateSchema = z.object({
+  variantId: z.string(),
+  intentId: z.string(),
+});
 
 export const PUT: APIRoute = async ({ request }) => {
   if (request.headers.get("Content-Type") !== "application/json") {
