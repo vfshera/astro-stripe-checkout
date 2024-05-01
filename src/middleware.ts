@@ -5,7 +5,10 @@ export const onRequest = defineMiddleware(({ request }, next) => {
   /**
    * Allow requests from the same origin
    */
-  if (new URL(request.url).pathname.startsWith("/api")) {
+  if (
+    new URL(request.url).pathname.startsWith("/api") &&
+    import.meta.env.PROD
+  ) {
     const originHeader = request.headers.get("Origin");
     const hostHeader = request.headers.get("Host");
 
