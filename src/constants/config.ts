@@ -1,4 +1,4 @@
 export const site = {
-  name: "Stripe Checkout",
+  name: "Shopify Stripe Checkout",
   description: "",
 };
