@@ -3,7 +3,7 @@ import { stripe } from "@/lib/stripe";
 import type { APIRoute } from "astro";
 import { z } from "astro/zod";
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async () => {
   try {
     const { price, items } = product.variants[0];
     const PRICE = Math.round(parseFloat(price) * 100 * items);
@@ -37,7 +37,7 @@ const updateSchema = z.object({
 
 export const PUT: APIRoute = async ({ request }) => {
   if (request.headers.get("Content-Type") !== "application/json") {
-    return new Response(JSON.stringify({ error: "Invalit request" }), {
+    return new Response(JSON.stringify({ error: "Invalid request" }), {
       status: 400,
     });
   }
