@@ -12,6 +12,45 @@ import type { Product, ProductVariant } from "@/lib/shopify/types";
 const stripePromise = loadStripe(import.meta.env.PUBLIC_STRIPE_API_KEY!);
 const PRODUCT_ID = "8714189865233";
 
+export default function CustomCheckout() {
+  const [clientSecret, setClientSecret] = useState("");
+  const [intentId, setIntentId] = useState("");
+
+  const [product, setProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    fetch("/api/shopify/checkout-product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: PRODUCT_ID }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIntentId(data.id);
+        setClientSecret(data.clientSecret);
+        setProduct(data.product);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <div>
+      {stripePromise && !!clientSecret && product && (
+        <Elements
+          stripe={stripePromise}
+          options={{
+            clientSecret,
+          }}
+        >
+          <CustomCheckoutForm intentId={intentId} product={product} />
+        </Elements>
+      )}
+    </div>
+  );
+}
+
 function CustomCheckoutForm({
   intentId,
   product,
